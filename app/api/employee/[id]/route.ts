@@ -7,13 +7,13 @@ export async function DELETE(req: NextRequest) {
         await mongooseConnection();
         
         // Extract the ID from the request body
-        const { _id } = await req.json(); 
-        if (!_id) {
+        const { id } = await req.json(); 
+        if (!id) {
             return NextResponse.json({ error: "User ID required" }, { status: 400 });
         }
 
         // Delete user by ID
-        const deletedUser = await User.findByIdAndDelete(_id);
+        const deletedUser = await User.findByIdAndDelete(id);
         if (!deletedUser) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
@@ -31,9 +31,9 @@ export async function PUT(req: NextRequest) {
 
         // Extract ID from request body
         const requestBody = await req.json();
-        const { _id, firstName, lastName, phone, password, ...rest } = requestBody;
-    
-        if (!_id) {
+        const { id, firstName, lastName, phone, password, ...rest } = requestBody;
+
+        if (!id) {
             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
         }
 
@@ -43,7 +43,7 @@ export async function PUT(req: NextRequest) {
 
         // Update user
         const updatedUser = await User.findByIdAndUpdate(
-            _id,
+            id,
             { firstName, lastName, phone, ...rest },
             { new: true, runValidators: true }
         );

@@ -33,6 +33,7 @@ interface EmployeeListProps {
     try {
       const response = await fetch(`/api/employee/${id}`, {
         method: "DELETE",
+        body: JSON.stringify({ id: id }),
         headers: { "Content-Type": "application/json" },
       });
   
@@ -53,6 +54,7 @@ interface EmployeeListProps {
   
     try {
       const updatedData = {
+        id: editingUser._id,
         firstName: updatedUser.firstName,
         lastName: updatedUser.lastName,
         phone: updatedUser.phone,
