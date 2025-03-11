@@ -7,6 +7,15 @@ interface Params {
     id: string;
   }
 
+interface UserInter {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    roles: string[]; 
+  }
+
 // create a new employee
 export async function POST(req: NextRequest) {
   await mongooseConnection();
@@ -40,7 +49,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   try {
     await mongooseConnection();
-    const users = await User.find({});
+    const users = await User.find().select("_id, firstName, lastName, email, phone, roles");;
 
     return NextResponse.json(users, { status: 200 });
   } catch (error) {

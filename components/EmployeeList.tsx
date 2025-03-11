@@ -8,12 +8,13 @@ interface User {
   lastName: string;
   email: string;
   phone: string;
-  roles: string;
+  role: string[];
 }
 interface EmployeeListProps {
-    initialUsers: User[];
+    initialUsers: User[]; 
     setUsers: React.Dispatch<React.SetStateAction<User[]>>;
-  }
+}
+
   
   const EmployeeList: React.FC<EmployeeListProps> = ({ initialUsers, setUsers }) => {
   const [users, setLocalUsers] = useState<User[]>(initialUsers);
@@ -36,7 +37,7 @@ interface EmployeeListProps {
       });
   
       if (!response.ok) {
-        const errorMessage = await response.text(); // Log server error message
+        const errorMessage = await response.text();
         throw new Error(`Error deleting user: ${errorMessage}`);
       }
   
@@ -55,8 +56,8 @@ interface EmployeeListProps {
         firstName: updatedUser.firstName,
         lastName: updatedUser.lastName,
         phone: updatedUser.phone,
-        email: editingUser.email, // Ensure all required fields are present
-        roles: editingUser.roles,
+        email: editingUser.email, 
+        role: editingUser.role,
       };
   
       const response = await fetch(`/api/employee/${editingUser._id}`, {
@@ -66,7 +67,7 @@ interface EmployeeListProps {
       });
   
       if (!response.ok) {
-        const errorData = await response.json(); // Capture API error message
+        const errorData = await response.json(); 
         throw new Error(errorData.message || "Error updating user");
       }
   
@@ -80,7 +81,7 @@ interface EmployeeListProps {
   };
   
 
-  if (!isClient) return <div>Loading...</div>; // Prevents hydration mismatch
+  if (!isClient) return <div>Loading...</div>; 
 
   return (
     <div>
@@ -102,7 +103,7 @@ interface EmployeeListProps {
               <td className="border p-2">{user.lastName}</td>
               <td className="border p-2">{user.email}</td>
               <td className="border p-2">{user.phone}</td>
-              <td className="border p-2">{user.roles}</td>
+              <td className="border p-2">{user.role}</td>
               <td className="border p-2">
                 <button onClick={() => deleteUser(user._id)} className="text-red-500 mr-2">
                   Delete

@@ -13,7 +13,7 @@ interface User {
   lastName: string;
   email: string;
   phone: string;
-  role: string;
+  role: string[];
 }
 
 const EmployeeDashboard = () => {
@@ -27,10 +27,8 @@ const EmployeeDashboard = () => {
 
     const fetchUsers = async () => {
       try {
-        const response = await fetch("/api/employees");
-        if (!response.ok) throw new Error("Failed to fetch employees");
+        const data: User[] = await fetch("/api/employees").then((res) => res.json());
 
-        const data = await response.json();
         setUsers(data);
       } catch (error) {
         console.error("Error fetching employees:", error);
