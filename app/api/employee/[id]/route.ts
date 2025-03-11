@@ -2,17 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { mongooseConnection } from "@/lib/mongooseConnection";
 import User from "@/models/User";
 
-// interface RequestContext 
-
 export async function DELETE(req: NextRequest) {
     try {
         await mongooseConnection();
-        const requestBody = await req.json(); 
-        const { id } =  requestBody.user._id;
+        
+        // Extract the ID from the request body
+        const { id } = await req.json(); 
         if (!id) {
             return NextResponse.json({ error: "User ID required" }, { status: 400 });
         }
 
+        // Delete user by ID
         const deletedUser = await User.findByIdAndDelete(id);
         if (!deletedUser) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -28,19 +28,20 @@ export async function DELETE(req: NextRequest) {
 export async function PUT(req: NextRequest) {
     try {
         await mongooseConnection();
+
+        // Extract ID from request body
         const requestBody = await req.json();
-        const { id } = requestBody.user._id;
+        const { id, firstName, lastName, phone, password, ...rest } = requestBody;
+
         if (!id) {
             return NextResponse.json({ error: "User ID is required" }, { status: 400 });
         }
-
-        
-        const { firstName, lastName, phone, password, ...rest } = requestBody;
 
         if (password) {
             return NextResponse.json({ error: "Password update is not allowed" }, { status: 400 });
         }
 
+        // Update user
         const updatedUser = await User.findByIdAndUpdate(
             id,
             { firstName, lastName, phone, ...rest },
