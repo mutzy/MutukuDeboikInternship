@@ -28,8 +28,8 @@ This is a simple CRUD web application built with Next.js and MongoDB. The projec
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/employee-record-management.git
-   cd employee-record-management
+   git clone https://github.com/mutzy/MutukuDeboikInternship.git
+   cd MutukuDeboikInternship
    ```
 2. Install dependencies:
    ```sh
