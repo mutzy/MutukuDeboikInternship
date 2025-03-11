@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const AddEmployee = () => {
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState({ firstName: "", lastName: "", email: "", phone: "", role: "Staff", password: "" });
+  const [user, setUser] = useState({ firstName: "", lastName: "", email: "", phone: "", role: "staff", password: "" });
 
   const addUser = async () => {
     try {
@@ -37,8 +37,8 @@ const AddEmployee = () => {
             <input type="email" placeholder="Email" onChange={(e) => setUser({ ...user, email: e.target.value })} className="border p-2 w-full mb-2"/>
             <input type="text" placeholder="Phone" onChange={(e) => setUser({ ...user, phone: e.target.value })} className="border p-2 w-full mb-2"/>
             <select onChange={(e) => setUser({ ...user, role: e.target.value })} className="border p-2 w-full mb-2">
-              <option value="Staff">Staff</option>
-              <option value="Admin">Admin</option>
+              <option value="staff">Staff</option>
+              <option value="admin">Admin</option>
             </select>
             <input type="password" placeholder="Password" onChange={(e) => setUser({ ...user, password: e.target.value })} className="border p-2 w-full mb-2"/>
             <button onClick={addUser} className="bg-green-500 text-white p-2 rounded mr-2">Add</button>
