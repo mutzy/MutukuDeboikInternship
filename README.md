@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Employee Record Management
 
-## Getting Started
+## Description
 
-First, run the development server:
+This is a simple CRUD web application built with Next.js and MongoDB. The project allows users to manage employee records while implementing authentication using NextAuth.js.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+✅ Create a record (First Name, Last Name, Email, Phone, Role: Admin/Staff).  
+✅ Read all records and display them in a list.  
+✅ Update the First Name, Last Name, and Phone.  
+✅ Delete a record.  
+✅ User authentication (Sign-up, Log in, Log out).  
+✅ Protect CRUD operations – only logged-in users can manage records.  
+✅ Use JWT-based authentication with NextAuth.js.  
+✅ Server-side rendering (SSR) or static generation (SSG).  
+✅ Error handling and proper validations.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js** (for frontend and API routes)
+- **MongoDB & Mongoose** (for data storage and schema management)
+- **NextAuth.js** (for authentication)
+- **Tailwind CSS** (for UI styling)
+- **bcrypt** (for password hashing)
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/employee-record-management.git
+   cd employee-record-management
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Set up environment variables in a `.env` file:
+   ```sh
+   MONGODB_URI=your_mongodb_connection_string
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXTAUTH_URL=http://localhost:3000
+   ```
+4. Run the development server:
+   ```sh
+   npm run dev
+   ```
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Sign up or log in** to access the application.
+- **Create, read, update, and delete employee records** while logged in.
+- **Authentication is required** to perform CRUD operations.
 
-## Deploy on Vercel
+## API Routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `POST /api/register` – Register a new user.
+- `POST /api/auth/[...nextauth]` – Log in user.
+- `GET /api/employees` – Get all employee records.
+- `POST /api/employees` – Create a new record.
+- `PUT /api/employee/:id` – Update an employee record.
+- `DELETE /api/employee/:id` – Delete an employee record.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Author
+
+Mutuku Muli
