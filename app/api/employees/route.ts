@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   try {
     await mongooseConnection();
-    const users = await User.find().select("_id, firstName, lastName, email, phone, roles");;
+    const users = await User.find({}).select("_id firstName lastName email phone role");
 
     return NextResponse.json(users, { status: 200 });
   } catch (error) {
